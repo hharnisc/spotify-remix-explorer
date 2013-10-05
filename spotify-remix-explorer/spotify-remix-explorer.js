@@ -15,5 +15,12 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+    var request = Meteor.require('request');
+    request('http://ws.spotify.com/search/1/track.json?q=artist%3aJustice', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var data = JSON.parse(body);
+        console.log(data);
+      }
+    })
   });
 }
